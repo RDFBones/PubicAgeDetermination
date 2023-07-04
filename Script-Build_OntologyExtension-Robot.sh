@@ -235,28 +235,28 @@ if [ $build -eq 1 ]; then
 	  --output results/merged.owl
 
 
-    ## MERGE TEMPLATE OUTPUTS
-    ## ----------------------
+    ## CONSISTENCY TEST
+    ## ----------------
 
-    robot merge --input results/template_CategoryLabels.owl \
-	  --input results/template_ValueSpecifications.owl \
-	  --input results/template_DataItems.owl \
-	  --input results/template_DataSets.owl \
-	  --input results/template_Assays.owl \
-	  --input results/template_DataTransformations.owl \
-	  --input results/template_ConclusionProcesses.owl \
-	  --input results/template_StudyDesignExecutions.owl \
-	  --input results/template_Protocols.owl \
-	  --input results/template_StudyDesigns.owl \
-	  --input results/template_Planning.owl \
-	  --input results/template_Investigations.owl \
-	  --output results/template.owl
+    robot reason --reasoner ELK \
+	  --input results/merged.owl \
+	  -D results/debug.owl
+
+    
+    ## CLEANUP TEMPORARY FILES
+    ## -----------------------
+
+    if [ $cleanup -eq 1 ]; then
+	cd results
+	find . -not -regex "./merged.owl" -delete
+	cd ..
+    fi
 
     
     ## ANNOTATE OUTPUT
     ## ---------------
 
-    robot annotate --input results/template.owl \
+    robot annotate --input results/merged.owl \
 	  --remove-annotations \
 	  --ontology-iri "http://w3id.org/rdfbones/ext/template/latest/template.owl" \
 	  --version-iri "http://w3id.org/rdfbones/ext/template/v0-1/template.owl" \
@@ -269,14 +269,6 @@ if [ $build -eq 1 ]; then
 	  --language-annotation dc:description "Extensions to the RDFBones core ontology are written to implement data structures representing osteological reseearch data in biological anthropology. The RDFBones ontology extension template provides a repository outline to help researchers embarking on the creation of an ontology extension. This output is dummy content proving that the template is operational and demonstrating how it is to be used. Authors of ontology extensions need to replace the dummy content with the information they intend to model in order to receive the desired outcome." en \
 	  --language-annotation dc:title "RDFBones ontology extension template" en \
 	  --output results/template.owl
-
-
-    ## CONSISTENCY TEST
-    ## ----------------
-
-    robot reason --reasoner ELK \
-	  --input results/template.owl \
-	  -D results/debug.owl
 
 fi
 
@@ -291,15 +283,4 @@ fi
 FILE=dependencies/RDFBones-O/robot/results/
 if [ -f "$FILE" ]; then
     rm -r dependencies/RDFBones-O/robot/results/
-fi
-
-
-## CLEANUP TEMPORARY FILES
-## -----------------------
-
-
-if [ $cleanup -eq 1 ]; then
-    cd results
-    find . -not -regex "./template.owl" -delete
-    cd ..
 fi
