@@ -258,17 +258,26 @@ if [ $build -eq 1 ]; then
 
     robot annotate --input results/merged.owl \
 	  --remove-annotations \
-	  --ontology-iri "http://w3id.org/rdfbones/ext/template/latest/template.owl" \
-	  --version-iri "http://w3id.org/rdfbones/ext/template/v0-1/template.owl" \
-	  --annotation owl:versionInfo "0.1" \
-	  --language-annotation rdfs:label "RDFBones ontology extension template" en \
-	  --language-annotation rdfs:comment "This is a dummy for an ontology extending the RDFBones core ontology. It is not intended for productivity but to demonstrate how the template for RDFBones ontology extensions works." en \
-	  --annotation dc:creator "Felix Engel" \
+	  --ontology-iri "http://w3id.org/rdfbones/ext/sb/latest/sb.owl" \
+	  --version-iri "http://w3id.org/rdfbones/ext/sb/v0-1/sb.owl" \
 	  --annotation dc:contributor "Stefan Schlager" \
-	  --annotation dc:contributor "Lukas Bender" \
-	  --language-annotation dc:description "Extensions to the RDFBones core ontology are written to implement data structures representing osteological reseearch data in biological anthropology. The RDFBones ontology extension template provides a repository outline to help researchers embarking on the creation of an ontology extension. This output is dummy content proving that the template is operational and demonstrating how it is to be used. Authors of ontology extensions need to replace the dummy content with the information they intend to model in order to receive the desired outcome." en \
-	  --language-annotation dc:title "RDFBones ontology extension template" en \
-	  --output results/template.owl
+	  --annotation dc:creator "Felix Engel" \
+	  --annotation dc:date 2023-07-06 \
+	  --language-annotation dc:description "This RDFBones ontology extension implements the Suchey-Brooks method for estimating age at death from the degree of pubic symphysis deterioration in skeletal specimen as outlined by Brooks & Suchey (1990)." en \
+	  --annotation dc:source "Brooks, S., & Suchey, J. M. (1990). Skeletal age determination based on the os pubis: a comparison of the Acsádi- Nemeskéri and Suchey-Brooks methods. Human Evolution 5(3), 227-238 . doi:10.1007/BF02437238" \
+	  --language-annotation dc:title "Suchey-Brooks Method for Pubic Age Determination" en \
+	  --annotation owl:versionInfo "0.1" \
+	  --language-annotation rdfs:comment "This RDFBones ontology extension only works in conjunction with the RDFBones core ontology." en \
+	  --language-annotation rdfs:label "Suchey-Brooks Method for Pubic Age Determination" en \
+	  --output results/sb.owl
+
+    
+    ## CLEANUP TEMPORARY FILES
+    ## -----------------------
+
+    if [ $cleanup -eq 1 ]; then
+	rm results/merged.owl
+    fi
 
 fi
 
