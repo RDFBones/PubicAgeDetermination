@@ -262,11 +262,11 @@ if [ $build -eq 1 ]; then
 	  --version-iri "http://w3id.org/rdfbones/ext/sb/v0-1/sb.owl" \
 	  --annotation dc:contributor "Stefan Schlager" \
 	  --annotation dc:creator "Felix Engel" \
-	  --annotation dc:date 2023-07-06 \
+	  --annotation dc:date 2023-07-13 \
 	  --language-annotation dc:description "This RDFBones ontology extension implements the Suchey-Brooks method for estimating age at death from the degree of pubic symphysis deterioration in skeletal specimen as outlined by Brooks & Suchey (1990)." en \
 	  --annotation dc:source "Brooks, S., & Suchey, J. M. (1990). Skeletal age determination based on the os pubis: a comparison of the Acsádi- Nemeskéri and Suchey-Brooks methods. Human Evolution 5(3), 227-238 . doi:10.1007/BF02437238" \
 	  --language-annotation dc:title "Suchey-Brooks Method for Pubic Age Determination" en \
-	  --annotation owl:versionInfo "0.1" \
+	  --annotation owl:versionInfo "0.1.1" \
 	  --language-annotation rdfs:comment "This RDFBones ontology extension only works in conjunction with the RDFBones core ontology." en \
 	  --language-annotation rdfs:label "Suchey-Brooks Method for Pubic Age Determination" en \
 	  --output results/sb.owl
